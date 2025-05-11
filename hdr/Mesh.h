@@ -6,23 +6,31 @@
 /*   By: mteerlin <mteerlin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/03/07 15:16:15 by mteerlin      #+#    #+#                 */
-/*   Updated: 2025/03/14 13:32:03 by mteerlin      ########   odam.nl         */
+/*   Updated: 2025/05/11 16:51:47 by mteerlin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-#include <map>
+#include <string>
+#include <vector>
 
 class Mesh
 {
-	public:
-	std::map<std::string, int> m_indexedVectors;
-	std::map<std::string, int> m_indexedFaces;
-
 	private:
-	Mesh::Mesh();
-	Mesh::~Mesh();
+	void	parseVertex(std::stringstream & line);
+	void	parseTexture(std::stringstream & line);
+	void	parseFace(std::stringstream & line);
+	
+	public:
+	std::vector<std::vector<float>> m_vertices;
+	std::vector<std::vector<float>> m_textureVertices;
+	std::vector<std::vector<int>> m_faces;
+	
+	Mesh();
+	Mesh(std::string file);
+	~Mesh();
+	
+	void	loadFromFile(std::string file);
 
-	std::map<std::string, int> Mesh::getVectors();
-	std::map<std::string, int> Mesh::getFaces();
+	std::vector<std::vector<float>>	getVertices() const;
+	std::vector<std::vector<int>>	getFaces() const;
 };
