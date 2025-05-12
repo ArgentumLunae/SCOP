@@ -34,8 +34,6 @@ void	Mesh::loadFromFile(std::string file)
 	std::ifstream	objFile;
 	std::string		line("");
 
-	std::cout << file << std::endl;
-
 	objFile.open(file);
 	if (objFile.fail())
 	{
@@ -47,6 +45,7 @@ void	Mesh::loadFromFile(std::string file)
 		std::stringstream linestream(line);
 		std::string lineheader("");
 
+		
 		if (linestream >> lineheader)
 		{
 			if (lineheader == "v")
@@ -93,6 +92,7 @@ void Mesh::parseFace(std::stringstream & line)
 	{
 		vertexIndeces.push_back(vertexIndex);
 	}
+	m_faces.push_back(vertexIndeces);
 	return ;
 }
 
