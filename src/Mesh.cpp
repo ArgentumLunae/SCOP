@@ -6,11 +6,11 @@
 /*   By: mteerlin <mteerlin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/11 14:03:35 by mteerlin      #+#    #+#                 */
-/*   Updated: 2025/05/11 17:37:27 by mteerlin      ########   odam.nl         */
+/*   Updated: 2025/05/13 21:28:19 by argentumlun   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Mesh.h"
+#include "Mesh.hpp"
 #include <sstream>
 #include <fstream>
 
@@ -20,7 +20,7 @@ Mesh::Mesh()
 {	
 }
 
-Mesh::Mesh(std::string file)
+Mesh::Mesh(std::string file) : _name(file)
 {
 	loadFromFile(file);
 }
@@ -96,12 +96,8 @@ void Mesh::parseFace(std::stringstream & line)
 	return ;
 }
 
-std::vector<std::vector<float>> Mesh::getVertices() const
-{
-	return m_vertices;
-}
+std::string						Mesh::getName() const {return _name;}
+std::vector<std::vector<float>> Mesh::getVertices() const {return m_vertices;}
+std::vector<std::vector<int>>	Mesh::getFaces() const {return m_faces;}
 
-std::vector<std::vector<int>> Mesh::getFaces() const
-{
-	return m_faces;
-}
+void	Mesh::setName(std::string name) {_name = name;}

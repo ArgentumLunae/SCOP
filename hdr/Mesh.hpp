@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   Mesh.h                                             :+:    :+:            */
+/*   Mesh.hpp                                           :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: mteerlin <mteerlin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/03/07 15:16:15 by mteerlin      #+#    #+#                 */
-/*   Updated: 2025/05/11 16:51:47 by mteerlin      ########   odam.nl         */
+/*   Updated: 2025/05/13 21:07:41 by argentumlun   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 class Mesh
 {
 	private:
+	std::string _name;
+
 	void	parseVertex(std::stringstream & line);
 	void	parseTexture(std::stringstream & line);
 	void	parseFace(std::stringstream & line);
@@ -31,6 +33,9 @@ class Mesh
 	
 	void	loadFromFile(std::string file);
 
+	std::string						getName() const;
 	std::vector<std::vector<float>>	getVertices() const;
 	std::vector<std::vector<int>>	getFaces() const;
+
+	void	setName(std::string name);
 };

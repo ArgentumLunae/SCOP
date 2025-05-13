@@ -6,15 +6,18 @@
 /*   By: mteerlin <mteerlin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/03/07 12:09:51 by mteerlin      #+#    #+#                 */
-/*   Updated: 2025/05/11 17:36:26 by mteerlin      ########   odam.nl         */
+/*   Updated: 2025/05/13 21:30:54 by argentumlun   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Mesh.h"
+#include "Mesh.hpp"
+#include "windowManagement.h"
 #include <iostream>
 
 int main(int argc, char** argv)
 {
+	GLFWwindow *window;
+
 	if (argc != 2)
 	{
 		std::cout << "Usecase: ./scop <file>" << std::endl;
@@ -54,5 +57,12 @@ int main(int argc, char** argv)
 		}
 		std::cout << std::endl;
 	}
+
+	if (!glfwInit())
+		return -1;
+	window = setupWindow(newmesh.getName());
+	if (!window || setUpGlad())
+		return -1;
+	glfwTerminate();
 	return 0;
 }

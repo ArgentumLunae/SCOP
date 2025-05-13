@@ -6,14 +6,14 @@
 #    By: mteerlin <mteerlin@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/01/20 13:49:24 by mteerlin      #+#    #+#                  #
-#    Updated: 2025/05/11 15:36:23 by mteerlin      ########   odam.nl          #
+#    Updated: 2025/05/13 21:37:10 by argentumlun   ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = scop
 OBJ_DIR = obj
 VPATH := $(subst $(" "),:,$(shell find src -type d))
-SRC_FILES = scop.cpp Mesh.cpp
+SRC_FILES = scop.cpp Mesh.cpp windowManagement.cpp
 OBJ_FILES = $(addprefix $(OBJ_DIR)/, $(notdir $(patsubst %.cpp, %.o, $(SRC_FILES))))
 HDR_FILES := $(addprefix -I,$(shell find hdr -type d -print))
 C_FLAGS = -Wall -Wextra -Werror
@@ -31,7 +31,7 @@ all: obj_dir $(NAME)
 
 $(NAME):	$(OBJ_FILES)
 			@echo "$(BOLD)Compiling $(BOLDBLUE)$(NAME)$(BOLD).$(NC)"
-			$(CC) $(OBJ_FILES) -o $(NAME)
+			$(CC) $(OBJ_FILES) -o $(NAME) -lglfw3 -lGLEW -lGL
 			@echo "$(BOLD)Compilation finished.$(NC)"
 
 $(OBJ_DIR)/%.o:	%.cpp $(HDR)
