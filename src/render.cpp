@@ -1,23 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   windowManagement.h                                 :+:    :+:            */
+/*   render.cpp                                         :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: mteerlin <mteerlin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2025/05/16 15:35:21 by mteerlin      #+#    #+#                 */
-/*   Updated: 2025/05/16 15:35:22 by mteerlin      ########   odam.nl         */
+/*   Created: 2025/05/16 15:52:57 by mteerlin      #+#    #+#                 */
+/*   Updated: 2025/05/16 16:16:15 by mteerlin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-#include "glad.h"
-#include <GLFW/glfw3.h>
+#include "render.h"
 
-#define VERSION_MAJOR   3
-#define VERSION_MINOR   3
-#define WIN_WIDTH       1280
-#define WIN_HEIGHT      720
+void processInput(GLFWwindow *window)
+{
+	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+		glfwSetWindowShouldClose(window, true);
+}
 
-GLFWwindow  *setupWindow(std::string fileName);
-int          setUpGlad();
+int renderScene(GLFWwindow *window)
+{
+	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+	while (!glfwWindowShouldClose(window))
+	{
+		glfwSwapBuffers(window);
+		glClear(GL_COLOR_BUFFER_BIT);
+		glfwPollEvents();
+	}
+	return 0;
+}

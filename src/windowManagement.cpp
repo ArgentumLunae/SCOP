@@ -3,14 +3,15 @@
 /*                                                        ::::::::            */
 /*   windowManagement.cpp                               :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: argentumlunae <argentumlunae@student.co      +#+                     */
+/*   By: mteerlin <mteerlin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2025/05/13 20:09:59 by argentumlun   #+#    #+#                 */
-/*   Updated: 2025/05/13 21:29:06 by argentumlun   ########   odam.nl         */
+/*   Created: 2025/05/16 15:34:34 by mteerlin      #+#    #+#                 */
+/*   Updated: 2025/05/16 16:09:46 by mteerlin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "windowManagement.h"
+#include "glCallbacks.h"
 
 GLFWwindow  *setupWindow(std::string fileName)
 {
@@ -28,6 +29,7 @@ GLFWwindow  *setupWindow(std::string fileName)
         return NULL;
     }
     glfwMakeContextCurrent(window);
+	setGLCallbacks(window);
     return window;
 }
 

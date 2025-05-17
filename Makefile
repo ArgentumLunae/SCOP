@@ -6,17 +6,17 @@
 #    By: mteerlin <mteerlin@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/01/20 13:49:24 by mteerlin      #+#    #+#                  #
-#    Updated: 2025/05/13 21:37:10 by argentumlun   ########   odam.nl          #
+#    Updated: 2025/05/16 15:59:25 by mteerlin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = scop
 OBJ_DIR = obj
 VPATH := $(subst $(" "),:,$(shell find src -type d))
-SRC_FILES = scop.cpp Mesh.cpp windowManagement.cpp
+SRC_FILES = scop.cpp Mesh.cpp windowManagement.cpp glad.cpp render.cpp glCallbacks.cpp
 OBJ_FILES = $(addprefix $(OBJ_DIR)/, $(notdir $(patsubst %.cpp, %.o, $(SRC_FILES))))
 HDR_FILES := $(addprefix -I,$(shell find hdr -type d -print))
-C_FLAGS = -Wall -Wextra -Werror
+C_FLAGS = -Wall -Wextra -Werror -O3
 SAN_FLAGS = -g -fsanitize=thread
 CC = c++ $(C_FLAGS) #$(SAN_FLAGS)
 
@@ -31,12 +31,12 @@ all: obj_dir $(NAME)
 
 $(NAME):	$(OBJ_FILES)
 			@echo "$(BOLD)Compiling $(BOLDBLUE)$(NAME)$(BOLD).$(NC)"
-			$(CC) $(OBJ_FILES) -o $(NAME) -lglfw3 -lGLEW -lGL
+			$(CC) $(OBJ_FILES) -lglfw -ldl -o $(NAME)
 			@echo "$(BOLD)Compilation finished.$(NC)"
 
 $(OBJ_DIR)/%.o:	%.cpp $(HDR)
 			@echo "$(BOLD)creating file: $(NC)"
-			$(CC) $(HDR_FILES) -c $< -o $@
+			$(CC) $(HDR_FILES) -c $< -o $@ 
 
 obj_dir:
 			@clear
