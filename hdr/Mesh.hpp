@@ -6,21 +6,23 @@
 /*   By: mteerlin <mteerlin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/03/07 15:16:15 by mteerlin      #+#    #+#                 */
-/*   Updated: 2025/05/13 21:07:41 by argentumlun   ########   odam.nl         */
+/*   Updated: 2025/05/17 17:21:15 by mteerlin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string>
-#include <vector>
+#include "Material.hpp"
+#include <map>
 
 class Mesh
 {
 	private:
-	std::string _name;
+	std::string 					_name;
+	std::map<std::string, Material>	_materials;
 
 	void	parseVertex(std::stringstream & line);
 	void	parseTexture(std::stringstream & line);
 	void	parseFace(std::stringstream & line);
+	void	parseMaterial(std::stringstream &line);
 	
 	public:
 	std::vector<std::vector<float>> m_vertices;

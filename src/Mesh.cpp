@@ -6,7 +6,7 @@
 /*   By: mteerlin <mteerlin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/11 14:03:35 by mteerlin      #+#    #+#                 */
-/*   Updated: 2025/05/13 21:28:19 by argentumlun   ########   odam.nl         */
+/*   Updated: 2025/05/17 17:49:19 by mteerlin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ Mesh::Mesh()
 {	
 }
 
-Mesh::Mesh(std::string file) : _name(file)
+Mesh::Mesh(std::string file) : _name(""), _mtlfile("")
 {
 	loadFromFile(file);
 }
@@ -48,7 +48,11 @@ void	Mesh::loadFromFile(std::string file)
 		
 		if (linestream >> lineheader)
 		{
-			if (lineheader == "v")
+			if (lineheader == "o")
+				linestream >> _name;
+			else if (lineheader == "mtllib")
+				parseMaterial(linestream);
+			else if (lineheader == "v")
 				parseVertex(linestream);
 			else if (lineheader == "vt")
 				parseTexture(linestream);
